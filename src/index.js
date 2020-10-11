@@ -3,24 +3,34 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 
-class Toggle extends React.Component {
+class NameForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { isToggleOn: true };
-    this.handleClick = this.handleClick.bind(this);
+    this.state = { value: 'Please write an essay about your favorite DOM element.' };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
-  handleClick() {
-    this.setState((state) => ({
-      isToggleOn: !state.isToggleOn,
-    }));
+  handleChange(event) {
+    this.setState({ value: event.target.value });
+  }
+  handleSubmit(event) {
+    alert('A name was submitted: ' + this.state.value);
+    event.preventDefault();
   }
   render() {
     return (
-      <button onClick={this.handleClick}>
-        {this.state.isToggleOn ? "on" : "OFF"}
-      </button>
-    );
+      <form onSubmit={this.handleSubmit}>
+        <label>
+          essay:
+          <textarea value={this.state.value} onChange={this.handleChange}>
+
+          </textarea>
+        </label>
+        <input type="submit" value="submit" />
+      </form>
+    )
   }
+
 }
 
-ReactDOM.render(<Toggle />, document.getElementById("root"));
+ReactDOM.render(<NameForm />, document.getElementById('root'))
