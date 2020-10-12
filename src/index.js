@@ -17,8 +17,10 @@ class NameForm extends React.Component {
     alert('A name was submitted: ' + this.state.value);
     event.preventDefault();
   }
+  //trying atom
   render() {
     return (
+
       <form onSubmit={this.handleSubmit}>
         <label>
           essay:
