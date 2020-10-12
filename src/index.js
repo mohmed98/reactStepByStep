@@ -3,36 +3,49 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 
-class NameForm extends React.Component {
+class Reservation extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { value: 'Please write an essay about your favorite DOM element.' };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.state = {
+      isGoing: true,
+      numberOfGuests: 2,
+    };
+    this.handleInputChange = this.handleInputChange.bind(this);
   }
-  handleChange(event) {
-    this.setState({ value: event.target.value });
+  handleInputChange(event) {
+    const target = event.target;
+    const value = target.type === "checkbox" ? target.checked : target.value;
+    const name = target.name;
+    this.setState({
+      [name]: value,
+    });
   }
-  handleSubmit(event) {
-    alert('A name was submitted: ' + this.state.value);
-    event.preventDefault();
-  }
-  //trying atom
+
   render() {
     return (
-
-      <form onSubmit={this.handleSubmit}>
+      <form>
         <label>
-          essay:
-          <textarea value={this.state.value} onChange={this.handleChange}>
-
-          </textarea>
+          Is going:
+          <input
+            name="isGoing"
+            type="checkbox"
+            checked={this.state.isGoing}
+            onChange={this.handleInputChange}
+          />
         </label>
-        <input type="submit" value="submit" />
+        <br />
+        <label>
+          Number of guests:
+          <input
+            name="numberOfGuests"
+            type="number"
+            value={this.state.numberOfGuests}
+            onChange={this.handleInputChange}
+          />
+        </label>
       </form>
-    )
+    );
   }
-
 }
 
-ReactDOM.render(<NameForm />, document.getElementById('root'))
+ReactDOM.render(<Reservation />, document.getElementById("root"));
